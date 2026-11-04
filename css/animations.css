@@ -1,0 +1,114 @@
+/* =========================================================================
+   ANIMATIONS.CSS — keyframes, hero intro, scroll-reveal system
+   Only transform / opacity (and a few clip-paths) are animated.
+   ========================================================================= */
+
+@keyframes spin { to { rotate: 360deg; } }
+@keyframes ping { 0% { transform: scale(0.6); opacity: 0.9; } 80%, 100% { transform: scale(1.9); opacity: 0; } }
+@keyframes cue { 0% { transform: translateY(-110%); } 100% { transform: translateY(260%); } }
+@keyframes marquee { to { transform: translateX(-50%); } }
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
+@keyframes introUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes lineUp { from { transform: translateY(108%); } to { transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes frameReveal {
+  from { clip-path: inset(100% 0 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes imgSettle { from { transform: scale(1.18); } to { transform: none; } }
+@keyframes chipIn { from { opacity: 0; transform: translateY(12px) scale(0.94); } to { opacity: 1; transform: none; } }
+@keyframes cardIn { from { opacity: 0; transform: translateY(18px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes modalIn { from { opacity: 0; transform: translateY(24px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+/* ---------- Ambient motion ---------- */
+.gradient-text { animation: gradientShift 8s ease-in-out infinite; }
+.hero__glow--a { animation: float 14s ease-in-out infinite; }
+.hero__glow--b { animation: float 18s ease-in-out infinite reverse; }
+
+/* ---------- Hero intro (pure CSS: no JS needed, can't get stuck) ---------- */
+.js .intro { animation: introUp 0.9s var(--ease-out) both; }
+.js .intro--1 { animation-delay: 0.05s; }
+.js .intro--2 { animation-delay: 0.12s; }
+.js .intro--3 { animation-delay: 0.62s; }
+.js .intro--4 { animation-delay: 0.72s; }
+.js .intro--5 { animation-delay: 0.82s; }
+.js .intro--6 { animation-delay: 0.92s; }
+
+.js .hero__title .line__inner { animation: lineUp 1s var(--ease-out) both; }
+.js .hero__title .line:nth-child(1) .line__inner { animation-delay: 0.18s; }
+.js .hero__title .line:nth-child(2) .line__inner { animation-delay: 0.26s; }
+.js .hero__title .line:nth-child(3) .line__inner { animation-delay: 0.34s; }
+.js .hero__title .line:nth-child(4) .line__inner { animation-delay: 0.42s; }
+
+.js .portrait__frame { animation: frameReveal 1.15s var(--ease-in-out) 0.15s both; }
+.js .portrait__frame img { animation: imgSettle 1.6s var(--ease-out) 0.15s both; }
+.js .portrait__halo { animation: fadeIn 1.4s ease 0.5s both; }
+.js .portrait__orbit { animation: fadeIn 1.4s ease 0.6s both, spin 70s linear infinite; }
+
+.js .chip, .js .coords { animation: chipIn 0.8s var(--ease-out) both; }
+.js .chip--a { animation: chipIn 0.8s var(--ease-out) 1s both, float 6s ease-in-out 1.8s infinite; }
+.js .chip--b { animation: chipIn 0.8s var(--ease-out) 1.12s both, float 7s ease-in-out 2s infinite; }
+.js .chip--c { animation: chipIn 0.8s var(--ease-out) 1.24s both, float 6.5s ease-in-out 2.2s infinite; }
+.js .coords { animation-delay: 1.3s; }
+.js .scroll-cue { animation: fadeIn 1s ease 1.4s both; }
+.js .nav { animation: fadeIn 0.8s ease 0.1s both; }
+
+/* ---------- Scroll reveals (classes toggled by animations.js) ---------- */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 0.9s var(--ease-out) calc(var(--i, 0) * 85ms),
+    transform 1s var(--ease-out) calc(var(--i, 0) * 85ms);
+}
+.js [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* Image clip reveal */
+.js [data-reveal="clip"] { opacity: 1; transform: none; }
+.js [data-reveal="clip"] .about__frame {
+  clip-path: inset(10% 8% 10% 8% round var(--r-xl));
+  transition: clip-path 1.3s var(--ease-in-out);
+}
+.js [data-reveal="clip"] .about__img img { transform: scale(1.14); transition: transform 1.8s var(--ease-out); }
+.js [data-reveal="clip"].is-in .about__frame { clip-path: inset(0 0 0 0 round var(--r-xl)); }
+.js [data-reveal="clip"].is-in .about__img img { transform: none; }
+
+/* Masked word-by-word headings ([data-split]) */
+.word { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.1em; margin-bottom: -0.1em; }
+.word-inner { display: inline-block; }
+.js .is-split .word-inner {
+  transform: translate3d(0, 110%, 0);
+  transition: transform 1s var(--ease-out) calc(var(--wi, 0) * 45ms);
+}
+.js .is-split.is-in .word-inner { transform: none; }
+
+/* Philosophy dividers draw in */
+.js .principle::before { transform: scaleX(0); transition: transform 1.2s var(--ease-in-out); }
+.js .principle.is-in::before { transform: scaleX(1); }
+
+/* Re-entering cards after filtering */
+.is-entering { animation: cardIn 0.6s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 60ms); }
+
+.modal[open] .modal__inner { animation: modalIn 0.5s var(--ease-out) both; }
+.modal[open]::backdrop { animation: fadeIn 0.3s ease both; }
+
+/* ---------- Lite mode (low-power devices / Save-Data) ---------- */
+.lite .portrait__orbit, .lite .rings circle, .lite .hero__glow { animation: none !important; }
+.lite .grain { display: none; }
+
+/* ---------- Reduced motion: show everything, no movement ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
+  }
+  .js [data-reveal], .js .is-split .word-inner, .js .intro, .js .hero__title .line__inner { opacity: 1 !important; transform: none !important; }
+  .js [data-reveal="clip"] .about__frame { clip-path: none !important; }
+  .marquee__track { animation: none !important; }
+}

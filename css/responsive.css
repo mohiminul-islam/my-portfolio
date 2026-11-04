@@ -1,0 +1,157 @@
+/* =========================================================================
+   RESPONSIVE.CSS — deliberate layouts per breakpoint (desktop-first)
+   ========================================================================= */
+
+/* ---------- Large laptops ---------- */
+@media (max-width: 1180px) {
+  .nav__links a { padding: 8px 11px; font-size: 0.86rem; }
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .skill-card--tall { grid-row: auto; grid-column: span 2; min-height: 0; }
+  .skill-card--wide { grid-column: span 2; }
+  .training-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chip--a { left: -10%; }
+  .chip--b { right: -8%; }
+  .coords { right: -4%; }
+}
+
+/* ---------- Tablets & small laptops ---------- */
+@media (max-width: 960px) {
+  :root { --nav-h: 70px; }
+  .nav__links, .nav__cta { display: none; }
+  .nav__toggle { display: block; }
+  .nav__inner { height: 58px; padding: 0 6px 0 20px; }
+
+  .hero { padding-top: calc(var(--nav-h) + 28px); padding-bottom: 96px; }
+  .hero__inner { grid-template-columns: 1fr; gap: 44px; }
+  .hero__visual { order: -1; }
+  .portrait { width: min(72vw, 340px); }
+  .hero__content { text-align: left; }
+  .scroll-cue { display: none; }
+
+  .about__grid { grid-template-columns: 1fr; }
+  .about__media { position: relative; top: 0; max-width: 520px; }
+  .about__frame { aspect-ratio: 4 / 5; }
+
+  .timeline { --rail-x: 8px; }
+  .tl-item { grid-template-columns: 1fr; padding-left: 36px; }
+  .tl-item__when { text-align: left; padding: 0 0 14px; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; }
+  .tl-item__loc, .tl-item__now { margin-top: 0; }
+  .tl-item__dot { top: 3px; }
+  .tl-card { margin-left: 0; }
+
+  .featured { grid-template-columns: 1fr; }
+  .featured__visual { min-height: 0; aspect-ratio: 16 / 10; border-right: 0; border-bottom: 1px solid var(--line); }
+
+  .edu-grid { grid-template-columns: 1fr 1fr; }
+  .edu-card--primary { grid-column: span 2; }
+
+  .course { grid-template-columns: 1fr; }
+  .course__visual { min-height: 320px; border-left: 0; border-top: 1px solid var(--line); }
+
+  .principle { grid-template-columns: 56px minmax(0, 1fr); gap: 12px 16px; }
+  .principle__text { grid-column: 2; }
+
+  .contact__grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Phones ---------- */
+@media (max-width: 640px) {
+  .section-head { margin-bottom: 40px; }
+  .eyebrow { margin-bottom: 16px; }
+
+  .hero__title { font-size: clamp(2.35rem, 11.2vw, 3.4rem); }
+  .hero__hello { margin-top: 22px; }
+  .roles { gap: 10px; }
+  .roles__label { padding-right: 10px; }
+  .hero__actions .btn { flex: 1 1 auto; }
+  .portrait { width: min(70vw, 300px); }
+  .chip { padding: 7px 11px; font-size: 0.72rem; }
+  .chip--a { top: 24%; left: -16%; }
+  .chip--b { top: auto; bottom: 22%; right: -16%; }
+  .chip--c, .coords { display: none; }
+  .portrait__orbit { width: 120%; }
+
+  .marquee { padding: 16px 0; }
+
+  .stats { grid-template-columns: 1fr; }
+  .stat { display: grid; grid-template-columns: auto 1fr; align-items: center; column-gap: 0; padding: 18px 0; }
+  .stat + .stat { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); }
+  .stat__label { grid-column: 3; margin: 0 0 0 18px; }
+  .stat { grid-template-columns: auto auto 1fr; }
+
+  .journey { grid-template-columns: 1fr; gap: 18px; padding-left: 28px; }
+  .journey::before { left: 5px; right: auto; top: 6px; bottom: 6px; width: 1px; height: auto; background: linear-gradient(var(--blue), var(--purple), var(--cyan)); }
+  .journey li { padding-top: 0; }
+  .journey li::before { left: -28px; top: 5px; }
+  .journey__year { display: inline; margin-right: 10px; }
+  .journey__text { display: inline; }
+
+  .bento { grid-template-columns: 1fr; gap: 14px; }
+  .skill-card--wide, .skill-card--tall { grid-column: auto; }
+  .skill-card { min-height: 0; }
+
+  .tl-item { padding-left: 30px; }
+  .tl-card { padding: 22px 20px; }
+
+  .featured__content { padding: 26px 22px 28px; }
+  .meta-grid { grid-template-columns: 1fr 1fr; }
+  .featured__actions .btn, .course__actions .btn { flex: 1 1 auto; }
+
+  .projects__bar { flex-direction: column; align-items: flex-start; }
+  .filters {
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .filters::-webkit-scrollbar { display: none; }
+  .filter { flex: none; }
+  .project-grid { grid-template-columns: 1fr; gap: 14px; }
+
+  .edu-grid { grid-template-columns: 1fr; gap: 14px; }
+  .edu-card--primary { grid-column: auto; }
+  .edu-card { min-height: 0; }
+
+  .course__content { padding: 26px 22px 30px; }
+  .course__visual { min-height: 300px; }
+  .rings { width: 240px; top: -12%; }
+  .training-grid { grid-template-columns: 1fr; gap: 12px; }
+  .train-card { min-height: 0; flex-direction: row; align-items: flex-start; gap: 16px; }
+  .train-card h4 { margin-top: 0; padding-top: 0; }
+
+  .principle { grid-template-columns: 1fr; gap: 10px; }
+  .principle__num { padding-top: 0; }
+  .principle__text { grid-column: auto; }
+  .principle:hover .principle__title { transform: none; }
+
+  .form__row { grid-template-columns: 1fr; }
+  .form__foot .btn { width: 100%; }
+  .contact-card { padding: 18px; }
+
+  .modal { width: calc(100% - 16px); max-height: 92vh; }
+  .modal__media { aspect-ratio: 16 / 9; }
+
+  .footer__inner { flex-direction: column; align-items: flex-start; }
+  .to-top { width: 46px; height: 46px; }
+}
+
+/* ---------- Very small phones ---------- */
+@media (max-width: 380px) {
+  .roles__label { display: none; }
+  .meta-grid { grid-template-columns: 1fr; }
+  .hero__actions { flex-direction: column; }
+  .hero__actions .btn { width: 100%; }
+}
+
+/* ---------- Touch devices: no hover-lift jitter ---------- */
+@media (hover: none) {
+  .surface:hover { transform: none; }
+  .surface::after { display: none; }
+}
+
+/* ---------- Large desktops ---------- */
+@media (min-width: 1600px) {
+  :root { --maxw: 1360px; }
+  .portrait { width: min(100%, 480px); }
+}
